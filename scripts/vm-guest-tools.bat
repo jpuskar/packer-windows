@@ -15,7 +15,7 @@ if exist "C:\Users\vagrant\windows.iso" (
 )
 
 if not exist "C:\Windows\Temp\windows.iso" (
-    powershell -Command "(New-Object System.Net.WebClient).DownloadFile('http://softwareupdate.vmware.com/cds/vmw-desktop/ws/12.0.0/2985596/windows/packages/tools-windows.tar', 'C:\Windows\Temp\vmware-tools.tar')" <NUL
+    powershell -Command "(New-Object System.Net.WebClient).DownloadFile('http://softwareupdate.vmware.com/cds/vmw-desktop/ws/12.5.2/4638234/windows/packages/tools-windows.tar', 'C:\Windows\Temp\vmware-tools.tar')" <NUL
     cmd /c ""C:\Program Files\7-Zip\7z.exe" x C:\Windows\Temp\vmware-tools.tar -oC:\Windows\Temp"
     FOR /r "C:\Windows\Temp" %%a in (VMware-tools-windows-*.iso) DO REN "%%~a" "windows.iso"
     rd /S /Q "C:\Program Files (x86)\VMWare"
@@ -47,3 +47,6 @@ if exist "C:\Users\vagrant\prl-tools-win.iso" (
 
 :done
 msiexec /qb /x C:\Windows\Temp\7z920-x64.msi
+
+shutdown -t 0 -r -f
+net stop winrm
