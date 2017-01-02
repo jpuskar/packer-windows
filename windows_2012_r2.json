@@ -23,11 +23,13 @@
         "./scripts/oracle-cert.cer",
         "./scripts/disable-winrm.ps1",
         "./scripts/enable-winrm.ps1",
-        "./scripts/install-update-script.cmd",
-        "./scripts/disable-winrm-and-reboot.cmd",
-        "./scripts/run-updates.cmd",
+        "./scripts/run-online-updates.cmd",
+        "./scripts/run-offline-updates.cmd",
         "./scripts/Install-OfflineUpdates.ps1",
-        "./scripts/install_dotnet45.cmd"
+        "./scripts/install_dotnet45.cmd",
+        "./scripts/PsExec.exe",
+        "./scripts/sdelete.exe",
+        "./scripts/hotfix-KB3000850.bat"
       ],
       "vmx_data": {
         "scsi0:5.present": "TRUE",
@@ -38,6 +40,15 @@
         "RemoteDisplay.vnc.port": "5900",
         "memsize": "4096",
         "numvcpus": "2",
+        "scsi0.virtualDev": "lsisas1068"
+      },
+      "vmx_data_post": {
+        "scsi0:5.present": "FALSE",
+        "scsi0:5.fileName": "",
+        "scsi0:5.deviceType": "",
+        "scsi0:5.startConnected": "FALSE",
+        "memsize": "4096",
+        "numvcpus": "1",
         "scsi0.virtualDev": "lsisas1068"
       }
     },
@@ -125,17 +136,18 @@
       "type": "windows-shell",
       "remote_path": "C:/windows/temp/script.bat",
       "execute_command": "{{.Vars}} cmd /c C:/Windows/Temp/script.bat",
-      "pause_before": "15s",
+      "pause_before": "30s",
       "scripts": [
         "./scripts/install_dotnet45.cmd",
         "./scripts/vm-guest-tools.bat",
         "./scripts/enable-rdp.bat",
-        "./scripts/run-updates.cmd",
-        "./scripts/run-updates.cmd",
-        "./scripts/run-updates.cmd",
-        "./scripts/run-updates.cmd",
-        "./scripts/run-updates.cmd",
-        "./scripts/run-updates.cmd",
+        "./scripts/hotfix-KB3000850.bat",
+        "./scripts/run-offline-updates.cmd",
+        "./scripts/run-offline-updates.cmd",
+        "./scripts/run-offline-updates.cmd",
+        "./scripts/run-offline-updates.cmd",
+        "./scripts/run-online-updates.cmd",
+        "./scripts/run-online-updates.cmd",
         "./scripts/compile-dotnet-assemblies.bat",
         "./scripts/disable-auto-logon.bat",
         "./scripts/compact.bat"

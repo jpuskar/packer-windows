@@ -11,13 +11,13 @@ if not exist "C:\Windows\Temp\ultradefrag-portable-6.1.0.amd64\udefrag.exe" (
 	cmd /c ""C:\Program Files\7-Zip\7z.exe" x C:\Windows\Temp\ultradefrag.zip -oC:\Windows\Temp"
 )
 
-if not exist "C:\Windows\Temp\SDelete.zip" (
-  powershell -Command "(New-Object System.Net.WebClient).DownloadFile('http://download.sysinternals.com/files/SDelete.zip', 'C:\Windows\Temp\SDelete.zip')" <NUL
-)
+rem if not exist "C:\Windows\Temp\SDelete.zip" (
+rem   powershell -Command "(New-Object System.Net.WebClient).DownloadFile('http://download.sysinternals.com/files/SDelete.zip', 'C:\Windows\Temp\SDelete.zip')" <NUL
+rem )
 
-if not exist "C:\Windows\Temp\sdelete.exe" (
-	cmd /c ""C:\Program Files\7-Zip\7z.exe" x C:\Windows\Temp\SDelete.zip -oC:\Windows\Temp"
-)
+rem if not exist "C:\Windows\Temp\sdelete.exe" (
+rem   cmd /c ""C:\Program Files\7-Zip\7z.exe" x C:\Windows\Temp\SDelete.zip -oC:\Windows\Temp"
+rem )
 
 msiexec /qb /x C:\Windows\Temp\7z920-x64.msi
 
@@ -26,7 +26,12 @@ rmdir /S /Q C:\Windows\SoftwareDistribution\Download
 mkdir C:\Windows\SoftwareDistribution\Download
 net start wuauserv
 
+if exist C:\windows\temp\vmware-tools.tar del /F /Q C:\windows\temp\vmware-tools.tar
+if exist C:\windows\temp\windows.iso del /F /Q C:\windows\temp\windows.iso
+if exist C:\Windows\Temp\VMWare rmdir /s /q C:\Windows\Temp\VMWare
+
 cmd /c C:\Windows\Temp\ultradefrag-portable-6.1.0.amd64\udefrag.exe --optimize --repeat C:
 
 cmd /c %SystemRoot%\System32\reg.exe ADD HKCU\Software\Sysinternals\SDelete /v EulaAccepted /t REG_DWORD /d 1 /f
-cmd /c C:\Windows\Temp\sdelete.exe -q -z C:
+cmd /c A:\sdelete.exe -q -z C:
+exit 0

@@ -39,14 +39,14 @@ function Check-ContinueRestartOrEnd() {
         1 {
             $prop = (Get-ItemProperty $RegistryKey).$RegistryEntry
             if (-not $prop) {
-                LogWrite "Restart Registry Entry Does Not Exist - Creating It"
-                Set-ItemProperty -Path $RegistryKey -Name $RegistryEntry -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File $($script:ScriptPath) -MaxUpdatesPerCycle $($MaxUpdatesPerCycle)"
+                #LogWrite "Restart Registry Entry Does Not Exist - Creating It"
+                #Set-ItemProperty -Path $RegistryKey -Name $RegistryEntry -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe -File $($script:ScriptPath) -MaxUpdatesPerCycle $($MaxUpdatesPerCycle)"
             } else {
                 LogWrite "Restart Registry Entry Exists Already"
             }
 
-            LogWrite "Restart Required - Restarting..."
-            Restart-Computer
+            #LogWrite "Restart Required - Restarting..."
+            #Restart-Computer
         }
         default {
             LogWrite "Unsure If A Restart Is Required"
@@ -228,6 +228,6 @@ Check-WindowsUpdates
 if ($global:MoreUpdates -eq 1) {
     Install-WindowsUpdates
 } else {
-    Check-ContinueRestartOrEnd
+    # Check-ContinueRestartOrEnd
 }
 
